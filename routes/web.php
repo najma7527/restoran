@@ -9,10 +9,14 @@ use App\Http\Middleware\KasirMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PaymentMethodController;
+use App\Http\Controllers\penggunaanBarang;
+use App\Http\Controllers\stokBarangController;
 
 Route::resource('menus', MenuController::class);
 Route::resource('Diskon', DiscountController::class);
 Route::resource('metode-pembayaran', PaymentMethodController::class);
+Route::resource('stok', stokBarangController::class);
+Route::resource('penggunaan', penggunaanBarang::class);
 
 
 

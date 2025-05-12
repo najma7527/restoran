@@ -8,9 +8,9 @@ class MetodePembayaran extends Model
 {
     // MetodePembayaran.php
 public function pesanan() {
-    return $this->hasMany(Pesanan::class, 'id_metode');
+    return $this->hasMany(Pesanan::class, 'id');
 }
-    protected $primaryKey = 'id_metode';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'nama_metode',
         'deskripsi'

@@ -8,16 +8,15 @@ class Menu extends Model
 {
     // Menu.php
 public function detailPesanan() {
-    return $this->hasMany(DetailPesanan::class, 'id_menu');
+    return $this->hasMany(DetailPesanan::class, 'id');
 }
-    protected $primaryKey = 'id_menu';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
+        'category',
         'nama_menu',
         'harga',
-        'kategori',
-        'deskripsi',
-        'gambar'
+        'stok',
     ];
 
     protected $casts = [

@@ -2,63 +2,48 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Menu;
+use App\Models\PenggunaanBahan;
+use App\Models\StokBarang;
 use Illuminate\Http\Request;
 
 class penggunaanBarang extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $data = PenggunaanBahan::with(['menu', 'bahan'])->get();
+        $menus = Menu::all();
+        $bahans = StokBarang::all();
+        return view('crud.penggunaanBarang', compact('data', 'menus', 'bahans'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'id_menu' => 'required|exists:menus,id',
+            'id_bahan' => 'required|exists:stok_barangs,id',
+            'jumlah_digunakan' => 'required|numeric',
+        ]);
+
+        PenggunaanBahan::create($request->all());
+        return redirect()->back()->with('success', 'Berhasil mencatat penggunaan bahan.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function update(Request $request, PenggunaanBahan $penggunaanBahan)
     {
-        //
+        $request->validate([
+            'id_menu' => 'required|exists:menus,id',
+            'id_bahan' => 'required|exists:stok_barangs,id',
+            'jumlah_digunakan' => 'required|numeric',
+        ]);
+
+        $penggunaanBahan->update($request->all());
+        return redirect()->back()->with('success', 'Berhasil mengupdate data penggunaan.');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function destroy(PenggunaanBahan $penggunaanBahan)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $penggunaanBahan->delete();
+        return redirect()->back()->with('success', 'Berhasil menghapus data.');
     }
 }

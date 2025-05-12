@@ -46,13 +46,13 @@ class DiscountController extends Controller
 
         $diskon->update($request->all());
 
-        return redirect()->route('diskon.index')->with('success', 'Diskon berhasil diperbarui');
+        return redirect()->route('Diskon.index')->with('success', 'Diskon berhasil diperbarui');
     }
 
     public function destroy(Diskon $diskon)
     {
         $diskon->delete();
 
-        return redirect()->route('diskon.index')->with('success', 'Diskon berhasil dihapus');
+        return redirect()->route('Diskon.index')->with('success', 'Diskon berhasil dihapus');
     }
 }

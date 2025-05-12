@@ -3,9 +3,8 @@
 @section('content')
 <h2>Kelola Diskon</h2>
 
-@include('partials.alert')
 
-<form action="{{ isset($editData) ? route('diskon.update', $editData->id) : route('diskon.store') }}" method="POST">
+<form action="{{ isset($editData) ? route('Diskon.update', $editData->id) : route('Diskon.store') }}" method="POST">
     @csrf
     @if(isset($editData)) @method('PUT') @endif
 
@@ -26,7 +25,7 @@
 
     <button class="btn btn-{{ isset($editData) ? 'warning' : 'primary' }}">{{ isset($editData) ? 'Update' : 'Tambah' }}</button>
     @if(isset($editData))
-        <a href="{{ route('diskon.index') }}" class="btn btn-secondary">Batal</a>
+        <a href="{{ route('Diskon.index') }}" class="btn btn-secondary">Batal</a>
     @endif
 </form>
 
@@ -48,8 +47,8 @@
             <td>{{ $diskon->persentase }}%</td>
             <td>{{ $diskon->tanggal_berlaku }}</td>
             <td>
-                <a href="{{ route('diskon.index', ['edit' => $diskon->id]) }}" class="btn btn-warning btn-sm">Edit</a>
-                <form action="{{ route('diskon.destroy', $diskon->id) }}" method="POST" style="display:inline;">
+                <a href="{{ route('Diskon.index', ['edit' => $diskon->id]) }}" class="btn btn-warning btn-sm">Edit</a>
+                <form action="{{ route('Diskon.destroy', $diskon->id) }}" method="POST" style="display:inline;">
                     @csrf @method('DELETE')
                     <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus?')">Hapus</button>
                 </form>

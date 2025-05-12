@@ -10,7 +10,9 @@
     @if($errors->any())
         <div class="alert alert-danger">
             <ul class="mb-0">
-                @foreach($errors->all() as $error) <li>{{ $error }}</li> @endforeach
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
             </ul>
         </div>
     @endif
@@ -58,7 +60,15 @@
                     <td>{{ $item->nama_metode }}</td>
                     <td>{{ $item->deskripsi }}</td>
                     <td>
-                        <a href="{{ route('metode-pembayaran.index', ['edit' => $item->id_metode]) }}" class="btn btn-sm btn-warning">Edit</a>
-                        <form action="{{ route('metode-pembayaran.destroy', $item->id_metode) }}" method="POST" style="display:inline">
-                            @csrf @method('DELETE')
-                            <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus?')">Hapus</button
+                        <a href="{{ route('metode-pembayaran.index', ['edit' => $item->id]) }}" class="btn btn-sm btn-warning">Edit</a>
+                        <form action="{{ route('metode-pembayaran.destroy', $item->id) }}" method="POST" style="display:inline">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus?')">Hapus</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+@endsection

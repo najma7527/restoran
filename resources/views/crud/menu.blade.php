@@ -3,9 +3,9 @@
 @section('content')
 <h2>Kelola Menu</h2>
 
-@include('partials.alert')
 
-<form action="{{ isset($editData) ? route('menu.update', $editData->id) : route('menu.store') }}" method="POST">
+
+<form action="{{ isset($editData) ? route('menus.update', $editData->id) : route('menus.store') }}" method="POST">
     @csrf
     @if(isset($editData)) @method('PUT') @endif
 
@@ -35,7 +35,7 @@
 
     <button class="btn btn-{{ isset($editData) ? 'warning' : 'primary' }}">{{ isset($editData) ? 'Update' : 'Tambah' }}</button>
     @if(isset($editData))
-        <a href="{{ route('menu.index') }}" class="btn btn-secondary">Batal</a>
+        <a href="{{ route('menus.index') }}" class="btn btn-secondary">Batal</a>
     @endif
 </form>
 
@@ -59,8 +59,8 @@
             <td>Rp {{ number_format($menu->harga, 2, ',', '.') }}</td>
             <td>{{ $menu->stok }}</td>
             <td>
-                <a href="{{ route('menu.index', ['edit' => $menu->id]) }}" class="btn btn-warning btn-sm">Edit</a>
-                <form action="{{ route('menu.destroy', $menu->id) }}" method="POST" style="display:inline;">
+                <a href="{{ route('menus.edit', $menu->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                <form action="{{ route('menus.destroy', $menu->id) }}" method="POST" style="display:inline;">
                     @csrf @method('DELETE')
                     <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus?')">Hapus</button>
                 </form>
