@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Diskon extends Model
+{
+    // Diskon.php
+public function pesanan() {
+    return $this->hasMany(Pesanan::class, 'id_diskon');
+}
+    protected $primaryKey = 'id_diskon';
+    protected $fillable = [
+        'nama_diskon',
+        'persentase',
+        'tanggal_berlaku'
+    ];
+    protected $casts = [
+        'tanggal_berlaku' => 'date',
+    ];
+}
