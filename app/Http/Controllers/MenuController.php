@@ -10,12 +10,12 @@ class MenuController extends Controller
     public function index()
     {
         $menus = Menu::all();
-        return view('menu', compact('menus'));
+        return view('crud.menu', compact('menus'));
     }
 
     public function create()
     {
-        return view('menu');
+        return view('crud.menu');
     }
 
     public function store(Request $request)
@@ -34,7 +34,7 @@ class MenuController extends Controller
 
     public function edit(Menu $menu)
     {
-        return view('menu', compact('menu'));
+        return view('crud.menu', compact('menu'));
     }
 
     public function update(Request $request, Menu $menu)

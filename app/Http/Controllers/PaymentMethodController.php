@@ -10,12 +10,12 @@ class PaymentMethodController extends Controller
     public function index()
     {
         $metodePembayaran = MetodePembayaran::all();
-        return view('metode_pembayaran', compact('metodePembayaran'));
+        return view('crud.Metode_pembayaran', compact('metodePembayaran'));
     }
 
     public function create()
     {
-        return view('metode_pembayaran');
+        return view('crud.Metode_pembayaran');
     }
 
     public function store(Request $request)
@@ -32,7 +32,7 @@ class PaymentMethodController extends Controller
 
     public function edit(MetodePembayaran $metodePembayaran)
     {
-        return view('metode_pembayaran', compact('metodePembayaran'));
+        return view('crud.Metode_pembayaran', compact('metodePembayaran'));
     }
 
     public function update(Request $request, MetodePembayaran $metodePembayaran)

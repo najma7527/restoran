@@ -40,7 +40,7 @@
   <div class="row">
     
     <!-- Sidebar -->
-    <div class="col-md-2 sidebar p-3">
+    <!-- <div class="col-md-2 sidebar p-3">
       <h5 class="text-white mb-4">Transaksi</h5>
       <ul class="nav flex-column">
         <li class="nav-item"><a href="#" class="nav-link">🧾 Order Masuk</a></li>
@@ -49,7 +49,7 @@
         <li class="nav-item"><a href="#" class="nav-link">📦 Riwayat</a></li>
         <li class="nav-item"><a href="{{ route('logout') }}" class="nav-link">🔒 Logout</a></li>
       </ul>
-    </div>
+    </div> -->
 
     <!-- Main Content -->
     <div class="col-md-10">

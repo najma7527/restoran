@@ -10,12 +10,12 @@ class DiscountController extends Controller
     public function index()
     {
         $diskons = Diskon::all();
-        return view('diskon', compact('diskons'));
+        return view('crud.diskon', compact('diskons'));
     }
 
     public function create()
     {
-        return view('diskon');
+        return view('crud.diskon');
     }
 
     public function store(Request $request)
@@ -33,7 +33,7 @@ class DiscountController extends Controller
 
     public function edit(Diskon $diskon)
     {
-        return view('diskon', compact('diskon'));
+        return view('crud.diskon', compact('diskon'));
     }
 
     public function update(Request $request, Diskon $diskon)

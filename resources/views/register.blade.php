@@ -61,6 +61,7 @@
                         {{-- <option value="" disabled selected>Pilih role</option> --}}
                         <option value="admin">Admin</option>
                         <option value="kasir">Kasir</option>
+                        <option value="staff_dapur">Staff Dapur</option>
                     </select>
                 </div>
                 <div class="mb-3">
