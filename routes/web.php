@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -7,8 +8,13 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\KasirMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\PaymentMethodController;
 
-Route::resource('menus', MenuController::class)->names('menu');
+Route::resource('menus', MenuController::class);
+Route::resource('Diskon', DiscountController::class);
+Route::resource('metode-pembayaran', PaymentMethodController::class);
+
+
 
 
 // Route::get('/', function () {
