@@ -18,7 +18,7 @@ class LoginController extends Controller
             return redirect()->route('admin'); 
         } elseif ($user->role === 'kasir') {
             return redirect()->route('kasir'); 
-        } elseif ($user->role === 'staff_dapur') {
+        } elseif ($user->role === 'Staff_dapur') {
             return redirect()->route('staff_dapur'); 
         } 
     }

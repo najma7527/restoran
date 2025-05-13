@@ -91,7 +91,7 @@
               </tr>
             </thead>
             <tbody>
-              @foreach($orders as $order)
+              @foreach($pesanan as $order)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $order->customer_name }}</td>

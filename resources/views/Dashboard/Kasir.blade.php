@@ -37,7 +37,7 @@
     <div class="col-auto sidebar p-3">
       <h4 class="text-white mb-4">Kasir Panel</h4>
       <ul class="nav flex-column">
-        <li class="nav-item"><a href="{{ route('order.index') }}" class="nav-link">🛒 New Order</a></li>
+        <li class="nav-item"><a href="{{ route('order.create') }}" class="nav-link">🛒 New Order</a></li>
       <li class="nav-item">
     <form action="{{ route('logout') }}" method="POST" style="display: inline;">
         @csrf
@@ -80,12 +80,11 @@
         <hr/>
 
         <!-- Kasir Action Buttons -->
-        <div class="row mt-4">
-          <div class="col-md-6">
+        
             <table class="table table-striped table-bordered shadow-sm">
               <thead class="table-dark">
               <tr>
-              <th>#</th>
+              <th>No</th>
               <th>Order ID</th>
               <th>Customer Name</th>
               <th>Items</th>
@@ -138,9 +137,6 @@
               @endforeach
               </tbody>
             </table>
-          </div>
-          <div class="col-md-6">
-            <button class="btn btn-info w-100">📅 View Orders History</button>
           </div>
         </div>
       </div>

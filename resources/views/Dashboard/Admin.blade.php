@@ -24,7 +24,7 @@
       <ul class="nav flex-column">
         <li class="nav-item"><a href="{{ route('menus.index') }}" class="nav-link">🍽️ Manage Menu</a></li>
         <li class="nav-item"><a href="{{ route('metode-pembayaran.index') }}" class="nav-link">💳 Metode Pembayaran</a></li>
-        <li class="nav-item"><a href="{{ route('diskon.index') }}" class="nav-link">🔖 Diskon</a></li>
+        <li class="nav-item"><a href="{{ route('Diskon.index') }}" class="nav-link">🔖 Diskon</a></li>
         <li class="nav-item"><a href="{{ route('order.index') }}" class="nav-link">📑 Manage Orders</a></li>
         <li class="nav-item">
           <form action="{{ route('logout') }}" method="POST">

@@ -62,7 +62,7 @@
                     class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400" required>
                     <option value="admin">Admin</option>
                     <option value="kasir">Kasir</option>
-                    <option value="staff_dapur">Staff Dapur</option>
+                    <option value="Staff_dapur">Staff Dapur</option>
                 </select>
             </div>
             <div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pesanan;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
@@ -12,10 +13,13 @@ class IndexController extends Controller
     }
 
     public function allData2 (){
-        Return View('Dashboard.Kasir');
+        $orders = Pesanan::latest()->take(10)->get(); 
+        Return View('Dashboard.Kasir', compact('orders'));
     }
 
     public function allData3 (){
-        Return View('Dashboard.StaffDapur');
+        $pesanan = Pesanan::latest()->take(10)->get(); 
+        Return View('Dashboard.StaffDapur', compact('pesanan'));    
     }
+
 }

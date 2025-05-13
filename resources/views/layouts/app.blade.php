@@ -5,30 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Transaksi</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
   <style>
     body {
-      background-color: #f4f6f9;
+      background-color: #f8f9fa;
+      font-family: 'Arial', sans-serif;
     }
     .navbar-custom {
-      background-color: #0d6efd;
+      background-color: #007bff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     .navbar-custom .navbar-brand,
     .navbar-custom .nav-link {
       color: white;
+      font-weight: bold;
+    }
+    .navbar-custom .nav-link:hover {
+      color: #ffc107;
     }
     .content-wrapper {
-      padding: 20px;
+      padding: 30px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-    .sidebar {
-      background-color: #343a40;
-      min-height: 100vh;
+    .footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #007bff;
       color: white;
-    }
-    .sidebar .nav-link {
-      color: white;
-    }
-    .sidebar .nav-link:hover {
-      background-color: #495057;
+      margin-top: 20px;
       border-radius: 5px;
     }
   </style>
@@ -38,21 +44,8 @@
 
 <div class="container-fluid">
   <div class="row">
-    
-    <!-- Sidebar -->
-    <!-- <div class="col-md-2 sidebar p-3">
-      <h5 class="text-white mb-4">Transaksi</h5>
-      <ul class="nav flex-column">
-        <li class="nav-item"><a href="#" class="nav-link">🧾 Order Masuk</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">💳 Metode Pembayaran</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">🔖 Diskon</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">📦 Riwayat</a></li>
-        <li class="nav-item"><a href="{{ route('logout') }}" class="nav-link">🔒 Logout</a></li>
-      </ul>
-    </div> -->
-
     <!-- Main Content -->
-    <div class="col-md-10">
+    <div class="col-md-12">
       <!-- Top Bar -->
       <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container-fluid">
@@ -64,11 +57,17 @@
       <div class="content-wrapper">
         @yield('content')
       </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        &copy; 2023 Kasir Panel. All Rights Reserved.
+      </div>
     </div>
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 @stack('scripts')
 </body>
 </html>

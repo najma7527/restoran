@@ -20,7 +20,7 @@ class StaffDapurMiddleware
         $user = Auth::user();
 
         // Memeriksa apakah pengguna login dan memiliki peran
-        if (!$user || $user->role !== 'staff_dapur') {
+        if (!$user || $user->role !== 'Staff_dapur') {
             // Jika tidak, abort dengan error 403 (Forbidden)
             abort(403, 'Unauthorized action');
         }

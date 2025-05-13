@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pesanan;
 use App\Models\DetailPesanan;
+use App\Models\Diskon;
+use App\Models\Menu;
+use App\Models\MetodePembayaran;
 
 class orderController extends Controller
 {
@@ -15,7 +18,7 @@ class orderController extends Controller
     public function index()
     {
         $pesanan = Pesanan::all();
-        return view('order', compact('pesanan'));
+        return view('crud.pesanan', compact('pesanan'));
     }
 
     /**
@@ -23,7 +26,11 @@ class orderController extends Controller
      */
     public function create()
     {
-        return view('order');
+     return view('order', [
+        'menus' => Menu::all(),
+        'diskons' => Diskon::all(),
+        'metodes' => MetodePembayaran::all()
+    ]);
     }
 
     /**
@@ -31,21 +38,55 @@ class orderController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'nama_pemesan' => 'required|string|max:255',
-            'tanggal_pesanan' => 'required|date',
-        ]);
+       $request->validate([
+        'nama_pelanggan' => 'required|string|max:100',
+        'menu_id' => 'required|array',
+        'jumlah' => 'required|array',
+        'id_metode' => 'required|exists:metode_pembayarans,id',
+        'pembayaran' => 'required|numeric|min:0',
+    ]);
 
-        $pesanan = Pesanan::create($validatedData);
-
-        if ($request->has('detail')) {
-            foreach ($request->detail as $detail) {
-                $pesanan->detailPesanan()->create($detail);
-            }
-        }
-
-        return redirect()->route('pesanan.index')->with('success', 'Pesanan berhasil dibuat.');
+    $total = 0;
+    foreach ($request->menu_id as $i => $menu_id) {
+        $menu = Menu::find($menu_id);
+        $jumlah = $request->jumlah[$i];
+        $subtotal = $menu->harga * $jumlah;
+        $total += $subtotal;
     }
+
+    if ($request->id_diskon) {
+        $diskon = Diskon::find($request->id_diskon);
+        $total -= ($total * $diskon->persentase / 100);
+    }
+
+    $kembalian = $request->pembayaran - $total;
+
+    $pesanan = Pesanan::create([
+        'nama_pelanggan' => $request->nama_pelanggan,
+        'total_harga' => $total,
+        'pembayaran' => $request->pembayaran,
+        'kembalian' => $kembalian,
+        'id_metode' => $request->id_metode,
+        'id_diskon' => $request->id_diskon,
+        'tanggal' => now()
+    ]);
+
+    foreach ($request->menu_id as $i => $menu_id) {
+        $menu = Menu::find($menu_id);
+        $jumlah = $request->jumlah[$i];
+        $harga = $menu->harga;
+        $subtotal = $harga * $jumlah;
+
+        DetailPesanan::create([
+            'id_pesanan' => $pesanan->id,
+            'id_menu' => $menu_id,
+            'jumlah' => $jumlah,
+            'harga_satuan' => $harga,
+            'subtotal' => $subtotal
+        ]);
+    }
+    return redirect()->route('order.create')->with('success', 'Transaksi berhasil disimpan!');
+}
 
     /**
      * Display the specified resource.

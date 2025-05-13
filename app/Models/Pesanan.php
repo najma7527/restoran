@@ -16,17 +16,17 @@ public function diskon() {
 public function detailPesanan() {
     return $this->hasMany(DetailPesanan::class, 'id_pesanan');
 }
-public function pelanggan() {
-    return $this->belongsTo(Pelanggan::class, 'id_pelanggan');
-}
+
 
     protected $primaryKey = 'id_pesanan';
     protected $fillable = [
-        'id_pelanggan',
+        'nama_pelanggan',
+        'total_harga',
+        'pembayaran',
+        'kembalian',
         'id_metode',
         'id_diskon',
-        'total_harga',
-        'status'
+        'tanggal',
     ];
     protected $casts = [
         'created_at' => 'datetime',
