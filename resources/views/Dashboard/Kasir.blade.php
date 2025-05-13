@@ -37,9 +37,7 @@
     <div class="col-auto sidebar p-3">
       <h4 class="text-white mb-4">Kasir Panel</h4>
       <ul class="nav flex-column">
-        <li class="nav-item"><a href="#" class="nav-link">🛒 New Order</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">📅 Orders History</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">💰 Transactions</a></li>
+        <li class="nav-item"><a href="{{ route('order.index') }}" class="nav-link">🛒 New Order</a></li>
       <li class="nav-item">
     <form action="{{ route('logout') }}" method="POST" style="display: inline;">
         @csrf
@@ -84,7 +82,62 @@
         <!-- Kasir Action Buttons -->
         <div class="row mt-4">
           <div class="col-md-6">
-            <button class="btn btn-primary w-100">+ New Order</button>
+            <table class="table table-striped table-bordered shadow-sm">
+              <thead class="table-dark">
+              <tr>
+              <th>#</th>
+              <th>Order ID</th>
+              <th>Customer Name</th>
+              <th>Items</th>
+              <th>Total Price</th>
+              <th>Status</th>
+              <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              @foreach($orders as $index => $order)
+              <tr>
+              <td>{{ $index + 1 }}</td>
+              <td>{{ $order->id }}</td>
+              <td>{{ $order->customer_name }}</td>
+              <td>
+              <ul class="list-unstyled mb-0">
+                @foreach($order->items as $item)
+                <li>{{ $item->name }} ({{ $item->pivot->quantity }}x)</li>
+                @endforeach
+              </ul>
+              </td>
+              <td>Rp {{ number_format($order->total_price, 0, ',', '.') }}</td>
+              <td>
+                @if($order->status == 'pending')
+                <span class="badge bg-warning">Pending</span>
+                @elseif($order->status == 'completed')
+                <span class="badge bg-success">Completed</span>
+                @else
+                <span class="badge bg-danger">Cancelled</span>
+                @endif
+              </td>
+              <td>
+                @if($order->status == 'pending')
+                <form action="{{ route('order.complete', $order->id) }}" method="POST" class="d-inline">
+                @csrf
+                @method('PATCH')
+                <button class="btn btn-sm btn-success">✔ Complete</button>
+                </form>
+                <form action="{{ route('order.cancel', $order->id) }}" method="POST" class="d-inline">
+                @csrf
+                @method('PATCH')
+                <button class="btn btn-sm btn-danger">✖ Cancel</button>
+                </form>
+                @else
+                <button class="btn btn-sm btn-secondary" disabled>✔ Complete</button>
+                <button class="btn btn-sm btn-secondary" disabled>✖ Cancel</button>
+                @endif
+              </td>
+              </tr>
+              @endforeach
+              </tbody>
+            </table>
           </div>
           <div class="col-md-6">
             <button class="btn btn-info w-100">📅 View Orders History</button>

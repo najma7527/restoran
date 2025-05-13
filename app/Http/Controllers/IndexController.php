@@ -14,4 +14,8 @@ class IndexController extends Controller
     public function allData2 (){
         Return View('Dashboard.Kasir');
     }
+
+    public function allData3 (){
+        Return View('Dashboard.StaffDapur');
+    }
 }

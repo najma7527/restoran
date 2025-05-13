@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login | Rumah Makan</title>
+    <title>Login | Restoran</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" />
 </head>
@@ -14,7 +14,7 @@
     <div class="bg-white shadow-xl rounded-3xl w-full max-w-md p-8 relative border border-orange-200">
         <div class="text-center mb-6">
             <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="logo rumah makan" class="mx-auto w-20 h-20 mb-2">
-            <h1 class="text-3xl font-bold text-orange-700">Login Rumah Makan</h1>
+            <h1 class="text-3xl font-bold text-orange-700">Login Restoran</h1>
             <p class="text-sm text-gray-500">Silakan masuk untuk melanjutkan</p>
         </div>
 

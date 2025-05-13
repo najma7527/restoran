@@ -1,88 +1,93 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="id">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Register Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-
-        .register-card {
-            max-width: 500px;
-            margin: 50px auto;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | Restoran</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" />
 </head>
 
-<body>
-    <div class="container">
-        <div class="card register-card p-4">
-            @if (session()->has('success'))
-                <div class="alert alert-success alert-solid alert-dismissible shadow-sm p-3 mb-5 rounded" role="alert">
-                    {{ session('success') }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @endif
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            <h2 class="text-center mb-4">Daftar Akun</h2>
-            <form action= "{{ route ('register')}}" method="POST">
-                @csrf
-                <div class="mb-3">
-                    <label for="name" class="form-label">Nama Lengkap</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama lengkap Anda">
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Alamat Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="email@example.com">
-                </div>
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan username">
-                </div>
-                <div class="mb-3">
-                    <label for="role" class="form-label">Pilih Role</label>
-                    <select class="form-select" name="role" id="role" required>
-                        {{-- <option value="" disabled selected>Pilih role</option> --}}
-                        <option value="admin">Admin</option>
-                        <option value="kasir">Kasir</option>
-                        <option value="staff_dapur">Staff Dapur</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Kata Sandi</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan kata sandi">
-                </div>
+<body class="bg-gradient-to-br from-yellow-50 to-orange-100 min-h-screen flex items-center justify-center">
 
-                <div class="mb-3">
-                    <label for="confirmPassword" class="form-label">Konfirmasi Kata Sandi</label>
-                    <input type="password" class="form-control" id="confirmPassword" name="password_confirmation" placeholder="Ulangi kata sandi">
-                </div>
-
-                
-
-                <button type="submit" class="btn btn-primary w-100">Daftar</button>
-                <p class="text-center mt-3">Sudah punya akun? <a href="{{ route('login') }}">Masuk di sini</a></p>
-            </form>
+    <div class="bg-white shadow-xl rounded-3xl w-full max-w-md p-8 relative border border-orange-200">
+        <div class="text-center mb-6">
+            <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="logo rumah makan" class="mx-auto w-20 h-20 mb-2">
+            <h1 class="text-3xl font-bold text-orange-700">Daftar Akun</h1>
+            <p class="text-sm text-gray-500">Silakan isi formulir untuk membuat akun</p>
         </div>
+
+        {{-- Error & Success Messages --}}
+        @if ($errors->any())
+            <div class="mb-4 bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-lg">
+                <ul class="list-disc list-inside text-sm space-y-1">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @if (session()->has('success'))
+            <div class="mb-5 p-4 rounded-lg shadow-sm bg-green-100 border border-green-300 text-green-800 relative">
+                <span>{{ session('success') }}</span>
+                <button type="button" class="absolute top-2 right-3 text-green-600 hover:text-green-800"
+                    onclick="this.parentElement.remove()">
+                    &times;
+                </button>
+            </div>
+        @endif
+
+        <form action="{{ route('register') }}" method="POST" class="space-y-4">
+            @csrf
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
+                <input type="text" id="name" name="name" placeholder="Masukkan nama lengkap"
+                    class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400" required>
+            </div>
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" id="email" name="email" placeholder="email@example.com"
+                    class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400" required>
+            </div>
+            <div>
+                <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                <input type="text" id="username" name="username" placeholder="Masukkan username"
+                    class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400" required>
+            </div>
+            <div>
+                <label for="role" class="block text-sm font-medium text-gray-700">Pilih Role</label>
+                <select id="role" name="role"
+                    class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400" required>
+                    <option value="admin">Admin</option>
+                    <option value="kasir">Kasir</option>
+                    <option value="staff_dapur">Staff Dapur</option>
+                </select>
+            </div>
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Kata Sandi</label>
+                <input type="password" id="password" name="password" placeholder="Masukkan kata sandi"
+                    class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400" required>
+            </div>
+            <div>
+                <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Kata Sandi</label>
+                <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Ulangi kata sandi"
+                    class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400" required>
+            </div>
+
+            <button type="submit"
+                class="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-2 rounded-lg transition duration-300">
+                Daftar
+            </button>
+        </form>
+
+        <p class="text-center text-sm text-gray-600 mt-4">
+            Sudah punya akun?
+            <a href="{{ route('login') }}" class="text-orange-600 hover:underline font-medium">Masuk di sini</a>
+        </p>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

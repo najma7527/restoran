@@ -37,10 +37,9 @@
     <div class="col-auto sidebar p-3">
       <h4 class="text-white mb-4">Dapur Panel</h4>
       <ul class="nav flex-column">
-        <li class="nav-item"><a href="#" class="nav-link">📦 Stok Bahan</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">🍽️ Menu</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">🧾 Penggunaan Bahan</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">📋 Lihat Pesanan</a></li>
+        <li class="nav-item"><a href="{{ route('stok.index') }}" class="nav-link">📦 Stok Bahan</a></li>
+        <li class="nav-item"><a href="{{ route('menus.index') }}" class="nav-link">🍽️ Menu</a></li>
+        <li class="nav-item"><a href="{{ route('penggunaan.index') }}" class="nav-link">🧾 Penggunaan Bahan</a></li>
         <li class="nav-item">
           <form action="{{ route('logout') }}" method="POST" style="display: inline;">
             @csrf
@@ -80,23 +79,29 @@
         </div>
 
         <hr/>
-
-        <!-- Staff Dapur Action Buttons -->
-        <div class="row mt-4">
-          <div class="col-md-6 mb-3">
-            <button class="btn btn-success w-100">+ Tambah Stok Bahan</button>
-          </div>
-          <div class="col-md-6 mb-3">
-            <button class="btn btn-primary w-100">+ Tambah Menu</button>
-          </div>
-          <div class="col-md-6 mb-3">
-            <button class="btn btn-warning w-100">🧾 Catat Penggunaan Bahan</button>
-          </div>
-          <div class="col-md-6 mb-3">
-            <button class="btn btn-info w-100">📋 Lihat Semua Pesanan</button>
-          </div>
-        </div>
-      </div>
+        <h4>Pesanan Terbaru</h4>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">Nama Pelanggan</th>
+                <th scope="col">Tanggal</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($orders as $order)
+                <tr>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $order->customer_name }}</td>
+                  <td>{{ $order->created_at->format('d-m-Y') }}</td>
+                  <td>{{ $order->status }}</td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+          
 
     </div>
   </div>

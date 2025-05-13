@@ -8,16 +8,18 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\KasirMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\orderController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\penggunaanBarang;
 use App\Http\Controllers\stokBarangController;
+use App\Http\Middleware\StaffDapurMiddleware;
 
 Route::resource('menus', MenuController::class);
 Route::resource('Diskon', DiscountController::class);
 Route::resource('metode-pembayaran', PaymentMethodController::class);
 Route::resource('stok', stokBarangController::class);
 Route::resource('penggunaan', penggunaanBarang::class);
-
+Route::resource('order', orderController::class);
 
 
 
@@ -27,6 +29,7 @@ Route::resource('penggunaan', penggunaanBarang::class);
 
 Route::get('/dashboard/admin', [IndexController::class, 'allData1'])->name('admin')->middleware(['auth', AdminMiddleware::class]);
 Route::get('/dashboard/kasir', [IndexController::class, 'allData2'])->name('kasir')->middleware(['auth', KasirMiddleware::class]);
+Route::get('/dashboard/staff_dapur', [IndexController::class, 'allData3'])->name('staff_dapur')->middleware(['auth', StaffDapurMiddleware::class]);
 
 
 Route::get('/login', function () {

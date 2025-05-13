@@ -22,11 +22,10 @@
     <div class="col-auto sidebar p-3">
       <h4 class="text-white mb-4">Admin Panel</h4>
       <ul class="nav flex-column">
-        <li class="nav-item"><a href="{{ route('admin') }}" class="nav-link">📊 Dashboard</a></li>
-        <li class="nav-item"><a href="{{ route('menu.index') }}" class="nav-link">🍽️ Manage Menu</a></li>
+        <li class="nav-item"><a href="{{ route('menus.index') }}" class="nav-link">🍽️ Manage Menu</a></li>
         <li class="nav-item"><a href="{{ route('metode-pembayaran.index') }}" class="nav-link">💳 Metode Pembayaran</a></li>
         <li class="nav-item"><a href="{{ route('diskon.index') }}" class="nav-link">🔖 Diskon</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">📑 Manage Orders</a></li>
+        <li class="nav-item"><a href="{{ route('order.index') }}" class="nav-link">📑 Manage Orders</a></li>
         <li class="nav-item">
           <form action="{{ route('logout') }}" method="POST">
             @csrf
