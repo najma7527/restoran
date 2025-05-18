@@ -33,8 +33,10 @@ class MenuController extends Controller
     }
 
     public function edit(Menu $menu)
-    {
-        return view('crud.menu', compact('menu'));
+    {  
+        $menus = Menu::all();
+    $editData = $menu;
+    return view('crud.menu', compact('menus', 'editData'));
     }
 
     public function update(Request $request, Menu $menu)

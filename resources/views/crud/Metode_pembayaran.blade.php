@@ -17,31 +17,46 @@
         </div>
     @endif
 
-    {{-- Form Tambah / Edit --}}
-    <form action="{{ isset($editData) ? route('metode-pembayaran.update', $editData->id_metode) : route('metode-pembayaran.store') }}" method="POST">
+   {{-- Form Tambah --}}
+@if(!isset($editData))
+    <form action="{{ route('metode-pembayaran.store') }}" method="POST">
         @csrf
-        @if(isset($editData)) @method('PUT') @endif
-
-        <input type="hidden" name="id_metode" value="{{ $editData->id_metode ?? '' }}">
 
         <div class="mb-3">
             <label for="nama_metode" class="form-label">Nama Metode</label>
-            <input type="text" name="nama_metode" class="form-control" value="{{ $editData->nama_metode ?? old('nama_metode') }}" required>
+            <input type="text" name="nama_metode" class="form-control" value="{{ old('nama_metode') }}" required>
         </div>
 
         <div class="mb-3">
             <label for="deskripsi" class="form-label">Deskripsi</label>
-            <textarea name="deskripsi" class="form-control">{{ $editData->deskripsi ?? old('deskripsi') }}</textarea>
+            <textarea name="deskripsi" class="form-control">{{ old('deskripsi') }}</textarea>
         </div>
 
-        <button type="submit" class="btn btn-{{ isset($editData) ? 'warning' : 'primary' }}">
-            {{ isset($editData) ? 'Update' : 'Tambah' }}
-        </button>
-
-        @if(isset($editData))
-            <a href="{{ route('metode-pembayaran.index') }}" class="btn btn-secondary">Batal</a>
-        @endif
+        <button type="submit" class="btn btn-primary">Tambah</button>
     </form>
+@endif
+
+{{-- Form Edit --}}
+@if(isset($editData))
+    <form action="{{ route('metode-pembayaran.update', $editData->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+
+        <div class="mb-3">
+            <label for="nama_metode" class="form-label">Nama Metode</label>
+            <input type="text" name="nama_metode" class="form-control" value="{{ old('nama_metode', $editData->nama_metode) }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="deskripsi" class="form-label">Deskripsi</label>
+            <textarea name="deskripsi" class="form-control">{{ old('deskripsi', $editData->deskripsi) }}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-warning">Update</button>
+        <a href="{{ route('metode-pembayaran.index') }}" class="btn btn-secondary">Batal</a>
+    </form>
+@endif
+
 
     <hr>
 
@@ -60,7 +75,8 @@
                     <td>{{ $item->nama_metode }}</td>
                     <td>{{ $item->deskripsi }}</td>
                     <td>
-                        <a href="{{ route('metode-pembayaran.index', ['edit' => $item->id]) }}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="{{ route('metode-pembayaran.edit', ['metode_pembayaran' => $item->id]) }}" class="btn btn-sm btn-warning">Edit</a>
+
                         <form action="{{ route('metode-pembayaran.destroy', $item->id) }}" method="POST" style="display:inline">
                             @csrf
                             @method('DELETE')

@@ -5,39 +5,73 @@
 
 
 
-<form action="{{ isset($editData) ? route('menus.update', $editData->id) : route('menus.store') }}" method="POST">
-    @csrf
-    @if(isset($editData)) @method('PUT') @endif
+{{-- Form Tambah --}}
+@if(!isset($editData))
+    <form action="{{ route('menus.store') }}" method="POST">
+        @csrf
+        <div class="mb-3">
+            <label for="category" class="form-label">Kategori</label>
+            <select name="category" class="form-control" required>
+                @foreach(['Makanan', 'Minuman', 'Cemilan'] as $kategori)
+                    <option value="{{ $kategori }}" {{ old('category') == $kategori ? 'selected' : '' }}>{{ $kategori }}</option>
+                @endforeach
+            </select>
+        </div>
 
-    <div class="mb-3">
-        <label>Kategori</label>
-        <select name="category" class="form-control" required>
-            @foreach(['Makanan', 'Minuman', 'Cemilan'] as $kategori)
-                <option value="{{ $kategori }}" {{ (old('category', $editData->category ?? '') == $kategori) ? 'selected' : '' }}>{{ $kategori }}</option>
-            @endforeach
-        </select>
-    </div>
+        <div class="mb-3">
+            <label for="nama_menu" class="form-label">Nama Menu</label>
+            <input type="text" name="nama_menu" class="form-control" value="{{ old('nama_menu') }}" required>
+        </div>
 
-    <div class="mb-3">
-        <label>Nama Menu</label>
-        <input type="text" name="nama_menu" class="form-control" value="{{ old('nama_menu', $editData->nama_menu ?? '') }}" required>
-    </div>
+        <div class="mb-3">
+            <label for="harga" class="form-label">Harga</label>
+            <input type="number" step="0.01" name="harga" class="form-control" value="{{ old('harga') }}" required>
+        </div>
 
-    <div class="mb-3">
-        <label>Harga</label>
-        <input type="number" name="harga" class="form-control" step="0.01" value="{{ old('harga', $editData->harga ?? '') }}" required>
-    </div>
+        <div class="mb-3">
+            <label for="stok" class="form-label">Stok</label>
+            <input type="number" name="stok" class="form-control" value="{{ old('stok') }}" required>
+        </div>
 
-    <div class="mb-3">
-        <label>Stok</label>
-        <input type="number" name="stok" class="form-control" value="{{ old('stok', $editData->stok ?? '') }}" required>
-    </div>
+        <button type="submit" class="btn btn-primary">Tambah</button>
+    </form>
+@endif
 
-    <button class="btn btn-{{ isset($editData) ? 'warning' : 'primary' }}">{{ isset($editData) ? 'Update' : 'Tambah' }}</button>
-    @if(isset($editData))
+{{-- Form Edit --}}
+@if(isset($editData))
+    <form action="{{ route('menus.update', $editData) }}" method="POST">
+        @csrf
+        @method('PUT')
+
+        <div class="mb-3">
+            <label for="category" class="form-label">Kategori</label>
+            <select name="category" class="form-control" required>
+                @foreach(['Makanan', 'Minuman', 'Cemilan'] as $kategori)
+                    <option value="{{ $kategori }}" {{ old('category', $editData->category) == $kategori ? 'selected' : '' }}>{{ $kategori }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="nama_menu" class="form-label">Nama Menu</label>
+            <input type="text" name="nama_menu" class="form-control" value="{{ old('nama_menu', $editData->nama_menu) }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="harga" class="form-label">Harga</label>
+            <input type="number" step="0.01" name="harga" class="form-control" value="{{ old('harga', $editData->harga) }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="stok" class="form-label">Stok</label>
+            <input type="number" name="stok" class="form-control" value="{{ old('stok', $editData->stok) }}" required>
+        </div>
+
+        <button type="submit" class="btn btn-warning">Update</button>
         <a href="{{ route('menus.index') }}" class="btn btn-secondary">Batal</a>
-    @endif
-</form>
+    </form>
+@endif
+
 
 <hr>
 

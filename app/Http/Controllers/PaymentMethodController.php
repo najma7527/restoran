@@ -32,7 +32,10 @@ class PaymentMethodController extends Controller
 
     public function edit(MetodePembayaran $metodePembayaran)
     {
-        return view('crud.Metode_pembayaran', compact('metodePembayaran'));
+        $editData = $metodePembayaran;
+        $metodePembayaran = MetodePembayaran::all();
+        
+        return view('crud.Metode_pembayaran', compact('metodePembayaran', 'editData'));
     }
 
     public function update(Request $request, MetodePembayaran $metodePembayaran)

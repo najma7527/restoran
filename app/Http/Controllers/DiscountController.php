@@ -28,15 +28,18 @@ class DiscountController extends Controller
 
         Diskon::create($request->all());
 
-        return redirect()->route('diskon.index')->with('success', 'Diskon berhasil ditambahkan');
+        return redirect()->route('Diskon.index')->with('success', 'Diskon berhasil ditambahkan');
     }
 
-    public function edit(Diskon $diskon)
+    public function edit(Diskon $Diskon)
     {
-        return view('crud.diskon', compact('diskon'));
+        $editData = $Diskon;
+        $diskons = Diskon::all();
+                
+        return view('crud.diskon', compact('diskons', 'editData'));
     }
 
-    public function update(Request $request, Diskon $diskon)
+    public function update(Request $request, Diskon $Diskon)
     {
         $request->validate([
             'nama_diskon' => 'required|string|max:255',
@@ -44,14 +47,14 @@ class DiscountController extends Controller
             'tanggal_berlaku' => 'required|date'
         ]);
 
-        $diskon->update($request->all());
+        $Diskon->update($request->all());
 
         return redirect()->route('Diskon.index')->with('success', 'Diskon berhasil diperbarui');
     }
 
-    public function destroy(Diskon $diskon)
+    public function destroy(Diskon $Diskon)
     {
-        $diskon->delete();
+        $Diskon->delete();
 
         return redirect()->route('Diskon.index')->with('success', 'Diskon berhasil dihapus');
     }

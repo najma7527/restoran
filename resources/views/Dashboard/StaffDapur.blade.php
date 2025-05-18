@@ -39,8 +39,7 @@
       <ul class="nav flex-column">
         <li class="nav-item"><a href="{{ route('stok.index') }}" class="nav-link">📦 Stok Bahan</a></li>
         <li class="nav-item"><a href="{{ route('menus.index') }}" class="nav-link">🍽️ Menu</a></li>
-        <li class="nav-item"><a href="{{ route('penggunaan.index') }}" class="nav-link">🧾 Penggunaan Bahan</a></li>
-        <li class="nav-item">
+                <li class="nav-item">
           <form action="{{ route('logout') }}" method="POST" style="display: inline;">
             @csrf
             <button type="submit" class="nav-link btn btn-link" style="padding: 0; border: none; background: none;">

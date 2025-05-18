@@ -18,7 +18,6 @@ Route::resource('menus', MenuController::class);
 Route::resource('Diskon', DiscountController::class);
 Route::resource('metode-pembayaran', PaymentMethodController::class);
 Route::resource('stok', stokBarangController::class);
-Route::resource('penggunaan', penggunaanBarang::class);
 Route::resource('order', orderController::class);
 
 
