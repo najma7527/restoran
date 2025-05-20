@@ -13,6 +13,7 @@ public function pesanan() {
 public function menu() {
     return $this->belongsTo(Menu::class, 'id_menu');
 }
+    protected $primaryKey = 'id';
     protected $fillable = [
         'id_pesanan',
         'id_menu',

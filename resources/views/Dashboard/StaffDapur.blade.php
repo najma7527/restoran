@@ -61,7 +61,7 @@
 
       <!-- Dashboard Overview -->
       <div class="content">
-        <h2>Dashboard Dapur</h2>
+        <h2>pesanan</h2>
         <div class="row mt-3">
           <div class="col-md-6">
             <div class="card shadow-sm p-3">
@@ -77,30 +77,43 @@
           </div>
         </div>
 
-        <hr/>
-        <h4>Pesanan Terbaru</h4>
-        <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">No</th>
-                <th scope="col">Nama Pelanggan</th>
-                <th scope="col">Tanggal</th>
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($pesanan as $order)
-                <tr>
-                  <td>{{ $loop->iteration }}</td>
-                  <td>{{ $order->customer_name }}</td>
-                  <td>{{ $order->created_at->format('d-m-Y') }}</td>
-                  <td>{{ $order->status }}</td>
-                </tr>
-              @endforeach
-            </tbody>
-          </table>
-          
+        <div class="container">
+  <div class="">
+    <div class="card-body">
+      <h3 class="text-center">Daftar Pesanan Terbaru</h3>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Nama Pelanggan</th>
+            <th>Menu Dipesan</th>
+            <th class="text-center" width="1%">Jumlah</th>
+            <th class="text-center">Tanggal</th>
+            <th class="text-center">Total Harga</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($pesanan as $order)
+            <tr>
+              <td>{{ $order->nama_pelanggan }}</td>
+              <td>
+                <ul>
+                  @foreach ($order->detailPesanan as $detail)
+                    <li>{{ $detail->menu->nama_menu }} (Rp {{ number_format($detail->harga_satuan, 0, ',', '.') }})</li>
+                  @endforeach
+                </ul>
+              </td>
+              <td class="text-center">{{ $order->detailPesanan->sum('jumlah') }}</td>
+              <td class="text-center">{{ \Carbon\Carbon::parse($order->tanggal)->format('d-m-Y') }}</td>
+              <td class="text-center">Rp {{ number_format($order->total_harga, 0, ',', '.') }}</td>
+              
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
 
     </div>
   </div>

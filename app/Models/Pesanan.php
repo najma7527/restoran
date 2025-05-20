@@ -18,7 +18,7 @@ public function detailPesanan() {
 }
 
 
-    protected $primaryKey = 'id_pesanan';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'nama_pelanggan',
         'total_harga',
